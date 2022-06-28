@@ -40,4 +40,23 @@ dependencyResolutionManagement {
 rootProject.name = "nimbus-android-sample"
 
 include("app")
-include("sample")
+
+if (file("../internal").exists()) includeFlat("internal")
+
+includeBuild("..") {
+    dependencySubstitution {
+        substitute(module("com.adsbynimbus.android:nimbus")).using(project(":library:all"))
+        substitute(module("com.adsbynimbus.android:nimbus-core")).using(project(":library:core"))
+        substitute(module("com.adsbynimbus.android:nimbus-request")).using(project(":library:request"))
+        substitute(module("com.adsbynimbus.android:nimbus-static")).using(project(":library:static"))
+        substitute(module("com.adsbynimbus.android:nimbus-ui")).using(project(":library:ui"))
+        substitute(module("com.adsbynimbus.android:nimbus-video")).using(project(":library:video"))
+        substitute(module("com.adsbynimbus.android:extension-aps")).using(project(":extensions:aps"))
+        substitute(module("com.adsbynimbus.android:extension-exoplayer")).using(project(":extensions:exoplayer"))
+        substitute(module("com.adsbynimbus.android:extension-facebook")).using(project(":extensions:facebook"))
+        substitute(module("com.adsbynimbus.android:extension-google")).using(project(":extensions:google"))
+        substitute(module("com.adsbynimbus.android:extension-okhttp")).using(project(":extensions:okhttp"))
+        substitute(module("com.adsbynimbus.android:extension-unity")).using(project(":extensions:unity"))
+        substitute(module("com.adsbynimbus.android:extension-viewability")).using(project(":extensions:viewability"))
+    }
+}
